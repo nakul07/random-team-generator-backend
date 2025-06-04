@@ -3,6 +3,7 @@ package com.assignment.randomteam.controller;
 import com.assignment.randomteam.dto.GeneratedTeamDTO;
 import com.assignment.randomteam.dto.PlayerDTO;
 import com.assignment.randomteam.dto.TeamGenerationRequest;
+import com.assignment.randomteam.dto.TeamGenerationResponse;
 import com.assignment.randomteam.entity.GeneratedTeamPlayer;
 import com.assignment.randomteam.entity.TeamGenerationSession;
 import com.assignment.randomteam.repository.TeamGenerationSessionRepository;
@@ -24,12 +25,10 @@ public class TeamGenerationController {
     private final TeamGenerationSessionRepository sessionRepository;
 
     @PostMapping
-    public List<GeneratedTeamDTO> generateTeams(@Valid @RequestBody TeamGenerationRequest request) {
-        return teamGenerationService.generateBalancedTeams(
-                request.getTitle(),
-                request.getNumberOfTeams()
-        );
+    public TeamGenerationResponse generateTeams(@Valid @RequestBody TeamGenerationRequest request) {
+        return teamGenerationService.generateBalancedTeams(request.getTitle(), request.getNumberOfTeams(), request.getNumberOfPlayers());
     }
+
 
     @GetMapping("/public/{uuid}")
     public List<GeneratedTeamDTO> viewGeneratedTeams(@PathVariable UUID uuid) {

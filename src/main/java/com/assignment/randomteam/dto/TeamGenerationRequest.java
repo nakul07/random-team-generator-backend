@@ -11,4 +11,7 @@ public class TeamGenerationRequest {
 
     @Min(value = 2, message = "Must have at least 2 teams")
     private int numberOfTeams;
+
+    @Min(value = 5, message = "Must have at least 5 players")
+    private int numberOfPlayers;
 }
