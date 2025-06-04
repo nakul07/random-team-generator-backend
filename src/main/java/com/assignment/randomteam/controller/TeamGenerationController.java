@@ -24,12 +24,24 @@ public class TeamGenerationController {
     private final TeamGenerationService teamGenerationService;
     private final TeamGenerationSessionRepository sessionRepository;
 
+    /**
+     * Controller to generate teams.
+     *
+     * @param request team generation request
+     * @return Team generation response
+     */
     @PostMapping
     public TeamGenerationResponse generateTeams(@Valid @RequestBody TeamGenerationRequest request) {
         return teamGenerationService.generateBalancedTeams(request.getTitle(), request.getNumberOfTeams(), request.getNumberOfPlayers());
     }
 
 
+    /**
+     * Controller to view the generated teams based on UUID.
+     *
+     * @param uuid public uuid of the generated team
+     * @return List of generated team DTO
+     */
     @GetMapping("/public/{uuid}")
     public List<GeneratedTeamDTO> viewGeneratedTeams(@PathVariable UUID uuid) {
         TeamGenerationSession session = sessionRepository.findByPublicId(uuid)

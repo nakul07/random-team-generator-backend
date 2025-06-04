@@ -25,6 +25,14 @@ public class TeamGenerationService {
     private final GeneratedTeamPlayerRepository generatedTeamPlayerRepository;
     private final TeamGenerationSessionRepository sessionRepository;
 
+    /**
+     * Method to generate the balanced teams.
+     *
+     * @param title title of the team
+     * @param numberOfTeams number of teams
+     * @param numberOfPlayersPerTeam number of players in each team
+     * @return Team generation response
+     */
     public TeamGenerationResponse generateBalancedTeams(String title, int numberOfTeams, int numberOfPlayersPerTeam) {
         List<Player> allPlayers = playerRepository.findAll();
         allPlayers.sort(Comparator.comparingInt(Player::getSkillLevel).reversed()); // Sort by skill level descending
